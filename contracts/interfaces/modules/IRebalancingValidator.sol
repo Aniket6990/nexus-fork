@@ -5,23 +5,22 @@ import { IValidator } from "./IValidator.sol";
 import { IERC7579Account } from "../IERC7579Account.sol";
 import { PackedUserOperation } from "account-abstraction/interfaces/PackedUserOperation.sol";
 
-interface IERC20DelegatorValidator is IValidator {
-    event ERC20SKV_ModuleInstalled(address wallet);
+interface IRebalancingValidator is IValidator {
+    event RebalancingSKV_ModuleInstalled(address wallet);
 
-    event ERC20SKV_ModuleUninstalled(address wallet);
+    event RebalancingSKV_ModuleUninstalled(address wallet);
 
-    event ERC20SKV_SessionKeyEnabled(address sessionKey, address wallet);
+    event RebalancingSKV_SessionKeyEnabled(address sessionKey, address wallet);
 
-    event ERC20SKV_SessionKeyDisabled(address sessionKey, address wallet);
+    event RebalancingSKV_SessionKeyDisabled(address sessionKey, address wallet);
 
-    event ERC20SKV_SessionKeyPaused(address sessionKey, address wallet);
+    event RebalancingSKV_SessionKeyPaused(address sessionKey, address wallet);
 
-    event ERC20SKV_SessionKeyUnpaused(address sessionKey, address wallet);
+    event RebalancingSKV_SessionKeyUnpaused(address sessionKey, address wallet);
 
     struct SessionData {
-        address token;
+        address executor;
         bytes4 funcSelector;
-        uint256 spendingLimit;
         uint48 validAfter;
         uint48 validUntil;
         bool live;
