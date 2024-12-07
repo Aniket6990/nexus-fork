@@ -50,7 +50,9 @@ pragma solidity ^0.8.27;
 /// single, delegatecall or batch exec abi.encoded as bytes
 
 // Custom type for improved developer experience
-type ExecutionMode is bytes32;
+type ModeCode is bytes32;
+
+// type ExecutionMode is bytes32;
 
 type CallType is bytes1;
 
@@ -85,7 +87,7 @@ ModeSelector constant MODE_OFFSET = ModeSelector.wrap(bytes4(keccak256("default.
 /// @dev ModeLib is a helper library to encode/decode ModeCodes
 library ModeLib {
     function decode(
-        ExecutionMode mode
+        ModeCode mode
     ) internal pure returns (CallType _calltype, ExecType _execType, ModeSelector _modeSelector, ModePayload _modePayload) {
         assembly {
             _calltype := mode
@@ -95,38 +97,38 @@ library ModeLib {
         }
     }
 
-    function decodeBasic(ExecutionMode mode) internal pure returns (CallType _calltype, ExecType _execType) {
+    function decodeBasic(ModeCode mode) internal pure returns (CallType _calltype, ExecType _execType) {
         assembly {
             _calltype := mode
             _execType := shl(8, mode)
         }
     }
 
-    function encode(CallType callType, ExecType execType, ModeSelector mode, ModePayload payload) internal pure returns (ExecutionMode) {
-        return ExecutionMode.wrap(bytes32(abi.encodePacked(callType, execType, bytes4(0), ModeSelector.unwrap(mode), payload)));
+    function encode(CallType callType, ExecType execType, ModeSelector mode, ModePayload payload) internal pure returns (ModeCode) {
+        return ModeCode.wrap(bytes32(abi.encodePacked(callType, execType, bytes4(0), ModeSelector.unwrap(mode), payload)));
     }
 
-    function encodeSimpleBatch() internal pure returns (ExecutionMode mode) {
+    function encodeSimpleBatch() internal pure returns (ModeCode mode) {
         mode = encode(CALLTYPE_BATCH, EXECTYPE_DEFAULT, MODE_DEFAULT, ModePayload.wrap(0x00));
     }
 
-    function encodeSimpleSingle() internal pure returns (ExecutionMode mode) {
+    function encodeSimpleSingle() internal pure returns (ModeCode mode) {
         mode = encode(CALLTYPE_SINGLE, EXECTYPE_DEFAULT, MODE_DEFAULT, ModePayload.wrap(0x00));
     }
 
-    function encodeTrySingle() internal pure returns (ExecutionMode mode) {
+    function encodeTrySingle() internal pure returns (ModeCode mode) {
         mode = encode(CALLTYPE_SINGLE, EXECTYPE_TRY, MODE_DEFAULT, ModePayload.wrap(0x00));
     }
 
-    function encodeTryBatch() internal pure returns (ExecutionMode mode) {
+    function encodeTryBatch() internal pure returns (ModeCode mode) {
         mode = encode(CALLTYPE_BATCH, EXECTYPE_TRY, MODE_DEFAULT, ModePayload.wrap(0x00));
     }
 
-    function encodeCustom(CallType callType, ExecType execType) internal pure returns (ExecutionMode mode) {
+    function encodeCustom(CallType callType, ExecType execType) internal pure returns (ModeCode mode) {
         mode = encode(callType, execType, MODE_DEFAULT, ModePayload.wrap(0x00));
     }
 
-    function getCallType(ExecutionMode mode) internal pure returns (CallType calltype) {
+    function getCallType(ModeCode mode) internal pure returns (CallType calltype) {
         assembly {
             calltype := mode
         }

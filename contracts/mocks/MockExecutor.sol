@@ -5,7 +5,7 @@ import { IModule } from "../interfaces/modules/IModule.sol";
 import { EncodedModuleTypes } from "../lib/ModuleTypeLib.sol";
 import { INexus } from "../interfaces/INexus.sol";
 import { MODULE_TYPE_EXECUTOR } from "../types/Constants.sol";
-import { ModeLib, ExecutionMode, ExecType, CallType, CALLTYPE_BATCH, CALLTYPE_SINGLE, CALLTYPE_DELEGATECALL, EXECTYPE_DEFAULT, EXECTYPE_TRY } from "../lib/ModeLib.sol";
+import { ModeLib, ModeCode, ExecType, CallType, CALLTYPE_BATCH, CALLTYPE_SINGLE, CALLTYPE_DELEGATECALL, EXECTYPE_DEFAULT, EXECTYPE_TRY } from "../lib/ModeLib.sol";
 import { ExecLib } from "../lib/ExecLib.sol";
 import { MODE_DEFAULT, ModePayload } from "../lib/ModeLib.sol";
 
@@ -49,7 +49,7 @@ contract MockExecutor is IExecutor {
     }
 
     function customExecuteViaAccount(
-        ExecutionMode mode,
+        ModeCode mode,
         INexus account,
         address target,
         uint256 value,

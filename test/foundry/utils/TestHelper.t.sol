@@ -323,7 +323,7 @@ contract TestHelper is CheatCodes, EventsAndErrors {
         Execution[] memory executions
     ) internal virtual view returns (bytes memory executionCalldata) {
         // Determine mode and calldata based on callType and executions length
-        ExecutionMode mode;
+        ModeCode mode;
         uint256 length = executions.length;
 
         if (length == 1) {
@@ -350,7 +350,7 @@ contract TestHelper is CheatCodes, EventsAndErrors {
         uint256 value,
         bytes memory data
     ) internal virtual view returns (bytes memory executionCalldata) {
-        ExecutionMode mode;
+        ModeCode mode;
         mode = (execType == EXECTYPE_DEFAULT) ? ModeLib.encodeSimpleSingle() : ModeLib.encodeTrySingle();
         executionCalldata = abi.encodeCall(
             Nexus.execute,

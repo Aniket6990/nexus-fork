@@ -193,7 +193,7 @@ contract TestAccountExecution_ExecuteBatch is TestAccountExecution_Base {
         CallType callType = CALLTYPE_BATCH;
 
         // Determine mode and calldata based on execType and executions length
-        ExecutionMode mode = ModeLib.encodeCustom(callType, unsupportedExecType);
+        ModeCode mode = ModeLib.encodeCustom(callType, unsupportedExecType);
         bytes memory executionCalldata = abi.encodeCall(Nexus.execute, (mode, ExecLib.encodeBatch(executions)));
 
         // Initialize the userOps array with one operation

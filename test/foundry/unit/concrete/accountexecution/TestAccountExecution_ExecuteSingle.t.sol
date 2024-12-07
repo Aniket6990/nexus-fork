@@ -153,7 +153,7 @@ contract TestAccountExecution_ExecuteSingle is TestAccountExecution_Base {
 
         Execution[] memory execution = new Execution[](1);
         execution[0] = Execution(address(counter), 0, abi.encodeWithSelector(Counter.incrementNumber.selector));
-        ExecutionMode mode = unsupportedMode; // Example unsupported call type
+        ModeCode mode = unsupportedMode; // Example unsupported call type
 
         (CallType callType,) = ModeLib.decodeBasic(mode);
         vm.expectRevert(abi.encodeWithSelector(UnsupportedCallType.selector, callType));
@@ -171,7 +171,7 @@ contract TestAccountExecution_ExecuteSingle is TestAccountExecution_Base {
 
         Execution[] memory execution = new Execution[](1);
         execution[0] = Execution(address(counter), 0, abi.encodeWithSelector(Counter.incrementNumber.selector));
-        ExecutionMode mode = unsupportedMode; // Example unsupported call type
+        ModeCode mode = unsupportedMode; // Example unsupported call type
 
         (CallType callType,) = ModeLib.decodeBasic(mode);
         vm.expectRevert(abi.encodeWithSelector(UnsupportedCallType.selector, callType));
@@ -194,7 +194,7 @@ contract TestAccountExecution_ExecuteSingle is TestAccountExecution_Base {
         CallType callType = CALLTYPE_SINGLE;
 
         // Determine mode and calldata based on execType and executions length
-        ExecutionMode mode = ModeLib.encodeCustom(callType, unsupportedExecType);
+        ModeCode mode = ModeLib.encodeCustom(callType, unsupportedExecType);
         bytes memory executionCalldata =
             abi.encodeCall(Nexus.execute, (mode, ExecLib.encodeSingle(execution[0].target, execution[0].value, execution[0].callData)));
 

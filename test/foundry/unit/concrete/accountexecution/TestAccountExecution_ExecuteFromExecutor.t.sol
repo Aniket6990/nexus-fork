@@ -172,7 +172,7 @@ contract TestAccountExecution_ExecuteFromExecutor is TestAccountExecution_Base {
     /// @notice Tests single execution with an unsupported execution type via MockExecutor
     function test_RevertIf_ExecuteFromExecutor_UnsupportedExecType_Single() public {
         // Create an unsupported execution mode with an invalid execution type
-        ExecutionMode unsupportedMode = ExecutionMode.wrap(bytes32(abi.encodePacked(CALLTYPE_SINGLE, bytes1(0xff), bytes4(0), bytes22(0))));
+        ModeCode unsupportedMode = ModeCode.wrap(bytes32(abi.encodePacked(CALLTYPE_SINGLE, bytes1(0xff), bytes4(0), bytes22(0))));
         bytes memory executionCalldata = abi.encodePacked(address(counter), uint256(0), abi.encodeWithSelector(Counter.incrementNumber.selector));
 
         // Decode the mode to extract the execution type for the expected revert
@@ -195,7 +195,7 @@ contract TestAccountExecution_ExecuteFromExecutor is TestAccountExecution_Base {
 
     /// @notice Tests execution with an unsupported call type via MockExecutor
     function test_RevertIf_ExecuteFromExecutor_UnsupportedCallType() public {
-        ExecutionMode unsupportedMode = ExecutionMode.wrap(bytes32(abi.encodePacked(bytes1(0xee), bytes1(0x00), bytes4(0), bytes22(0))));
+        ModeCode unsupportedMode = ModeCode.wrap(bytes32(abi.encodePacked(bytes1(0xee), bytes1(0x00), bytes4(0), bytes22(0))));
         bytes memory executionCalldata = abi.encodePacked(address(counter), uint256(0), abi.encodeWithSelector(Counter.incrementNumber.selector));
 
         (CallType callType, , , ) = ModeLib.decode(unsupportedMode);
@@ -216,7 +216,7 @@ contract TestAccountExecution_ExecuteFromExecutor is TestAccountExecution_Base {
     /// @notice Tests batch execution with an unsupported execution type via MockExecutor
     function test_RevertIf_ExecuteFromExecutor_UnsupportedExecType_Batch() public {
         // Create an unsupported execution mode with an invalid execution type
-        ExecutionMode unsupportedMode = ExecutionMode.wrap(bytes32(abi.encodePacked(CALLTYPE_BATCH, bytes1(0xff), bytes4(0), bytes22(0))));
+        ModeCode unsupportedMode = ModeCode.wrap(bytes32(abi.encodePacked(CALLTYPE_BATCH, bytes1(0xff), bytes4(0), bytes22(0))));
         bytes memory executionCalldata = abi.encodePacked(address(counter), uint256(0), abi.encodeWithSelector(Counter.incrementNumber.selector));
 
         // Decode the mode to extract the execution type for the expected revert

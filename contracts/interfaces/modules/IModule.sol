@@ -22,6 +22,8 @@ pragma solidity ^0.8.27;
 /// @author @zeroknots | Rhinestone.wtf | zeroknots.eth
 /// Special thanks to the Solady team for foundational contributions: https://github.com/Vectorized/solady
 interface IModule {
+    error AlreadyInitialized(address smartAccount);
+    error NotInitialized(address smartAccount);
     /// @notice Installs the module with necessary initialization data.
     /// @dev Reverts if the module is already initialized.
     /// @param data Arbitrary data required for initializing the module during `onInstall`.

@@ -12,7 +12,7 @@ pragma solidity ^0.8.27;
 // Nexus: A suite of contracts for Modular Smart Accounts compliant with ERC-7579 and ERC-4337, developed by Biconomy.
 // Learn more at https://biconomy.io. To report security issues, please contact us at: security@biconomy.io
 
-import { ExecutionMode } from "../../lib/ModeLib.sol";
+import { ModeCode } from "../../lib/ModeLib.sol";
 
 /// @title Nexus - ERC-7579 Account Configuration Interface
 /// @notice Interface for querying and verifying configurations of Smart Accounts compliant with ERC-7579.
@@ -30,7 +30,7 @@ interface IAccountConfig {
     /// @notice Checks if the account supports a certain execution mode.
     /// @param encodedMode The encoded mode to verify.
     /// @return supported True if the account supports the mode, false otherwise.
-    function supportsExecutionMode(ExecutionMode encodedMode) external view returns (bool supported);
+    function supportsExecutionMode(ModeCode encodedMode) external view returns (bool supported);
 
     /// @notice Checks if the account supports a specific module type.
     /// @param moduleTypeId The module type ID to verify.

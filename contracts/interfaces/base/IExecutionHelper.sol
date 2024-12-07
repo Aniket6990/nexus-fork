@@ -12,7 +12,7 @@ pragma solidity ^0.8.27;
 // Nexus: A suite of contracts for Modular Smart Accounts compliant with ERC-7579 and ERC-4337, developed by Biconomy.
 // Learn more at https://biconomy.io. To report security issues, please contact us at: security@biconomy.io
 
-import { ExecutionMode } from "../../lib/ModeLib.sol";
+import { ModeCode } from "../../lib/ModeLib.sol";
 
 import { IExecutionHelperEventsAndErrors } from "./IExecutionHelperEventsAndErrors.sol";
 
@@ -29,11 +29,11 @@ interface IExecutionHelper is IExecutionHelperEventsAndErrors {
     /// @param mode The execution mode, defining how the transaction is processed.
     /// @param executionCalldata The calldata to execute.
     /// @dev This function ensures that the execution complies with smart account execution policies and handles errors appropriately.
-    function execute(ExecutionMode mode, bytes calldata executionCalldata) external payable;
+    function execute(ModeCode mode, bytes calldata executionCalldata) external payable;
 
     /// @notice Allows an executor module to perform transactions on behalf of the account.
     /// @param mode The execution mode that details how the transaction should be handled.
     /// @param executionCalldata The transaction data to be executed.
     /// @return returnData The result of the execution, allowing for error handling and results interpretation by the executor module.
-    function executeFromExecutor(ExecutionMode mode, bytes calldata executionCalldata) external payable returns (bytes[] memory returnData);
+    function executeFromExecutor(ModeCode mode, bytes calldata executionCalldata) external payable returns (bytes[] memory returnData);
 }

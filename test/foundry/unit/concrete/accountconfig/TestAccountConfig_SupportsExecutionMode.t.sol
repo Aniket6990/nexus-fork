@@ -16,19 +16,19 @@ contract TestAccountConfig_SupportsExecutionMode is NexusTest_Base {
 
     /// @notice Tests if batch execution mode is supported
     function test_SupportsBatchExecutionMode_Success() public {
-        ExecutionMode mode = ModeLib.encodeSimpleBatch();
+        ModeCode mode = ModeLib.encodeSimpleBatch();
         assertTrue(accountConfig.supportsExecutionMode(mode), "AccountConfig should support batch execution mode.");
     }
 
     /// @notice Tests if single execution mode is supported
     function test_SupportsSingleExecutionMode_Success() public {
-        ExecutionMode mode = ModeLib.encodeSimpleSingle();
+        ModeCode mode = ModeLib.encodeSimpleSingle();
         assertTrue(accountConfig.supportsExecutionMode(mode), "AccountConfig should support single execution mode.");
     }
 
     /// @notice Tests an unsupported execution mode
     function test_RevertIf_UnsupportedExecutionMode() public {
-        ExecutionMode unsupportedMode = ModeLib.encode(
+        ModeCode unsupportedMode = ModeLib.encode(
             CALLTYPE_SINGLE,
             ExecType.wrap(0x10),
             ModeSelector.wrap(0x00000000),

@@ -9,9 +9,9 @@ event UserOperationRevertReason(bytes32 indexed userOpHash, address indexed send
 /// @title Base Contract for Account Execution Tests
 /// @notice Provides shared setup and utility functions for account execution tests
 abstract contract TestAccountExecution_Base is NexusTest_Base {
-    ExecutionMode public singleMode;
-    ExecutionMode public batchMode;
-    ExecutionMode public unsupportedMode;
+    ModeCode public singleMode;
+    ModeCode public batchMode;
+    ModeCode public unsupportedMode;
 
     Counter public counter;
     MockToken public token;

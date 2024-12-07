@@ -1,8 +1,8 @@
-import { deployments, ethers } from "hardhat";
+import { deployments } from "hardhat";
 export const ENTRY_POINT_V7 = "0x0000000071727De22E5E9d8BAf0edAc6f37da032";
 
 export async function deployToMainnet() {
-  const accounts = await ethers.getSigners();
+  const accounts = await ();
   const owner = accounts[0];
   const deployOptions = {
     from: await owner.getAddress(),

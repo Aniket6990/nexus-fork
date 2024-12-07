@@ -13,7 +13,7 @@ import { IERC20DelegatorValidator } from "../../interfaces/modules/IERC20Delegat
 import { ArrayLib } from "../../lib/ArrayLib.sol";
 
 contract DelegatorValidator is IERC20DelegatorValidator {
-    using ModeLib for ExecutionMode;
+    using ModeLib for ModeCode;
     using ExecLib for bytes;
 
 
@@ -109,7 +109,7 @@ contract DelegatorValidator is IERC20DelegatorValidator {
         address target;
         bytes calldata callData = userOp.callData;
         bytes4 sel = bytes4(callData[:4]);
-        ExecutionMode mode = ExecutionMode.wrap(bytes32(callData[4:36]));
+        ModeCode mode = ModeCode.wrap(bytes32(callData[4:36]));
         (CallType calltype, , , ) = ModeLib.decode(mode);
         if (calltype == CALLTYPE_SINGLE) {
             bytes calldata execData;
